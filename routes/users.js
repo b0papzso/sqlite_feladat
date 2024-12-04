@@ -3,7 +3,7 @@ import { dbQuery, dbRun } from "../database.js"
 
 const router = express.Router();
 
-router.get("/", async (res, next) =>{
+router.get("/", async (req, res, next) =>{
     try{
         const users = await dbQuery("SELECT * FROM users;")
         res.status(200).json(users)

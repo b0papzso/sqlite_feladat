@@ -7,8 +7,8 @@ import userRouter from "./routes/users.js"
 const app = express()
 
 app.use(cors())
-app.use(express.json)
-app.use("/users", userRouter)
+app.use(express.json())
+app.use("/api/users", userRouter)
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
