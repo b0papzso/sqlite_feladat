@@ -16,7 +16,7 @@ router.get("/", async (req, res, next) =>{
 router.get("/:id", async(req, res, next) =>{
     try{
         const [user] = await dbQuery("SELECT * FROM users WHERE id = ?;", [req.params.id])
-        if(!user) return res.status(404).json({ message : "Gatya"})
+        if(!user) return res.status(404).json({ message : "Sikertelen!"})
         res.status(200).json(user)
     }catch(err)
     {
@@ -36,7 +36,7 @@ router.post("/", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
     try {
         const user = await dbQuery("SELECT * FROM users WHERE id = ?;", [req.params.id]);
-        if (!user) return res.status(404).json({ message: "User not found : gatya" });
+        if (!user) return res.status(404).json({ message: "User not found" });
 
         await dbRun("UPDATE users SET firstName = ?,lastName = ?, email = ?, education = ? WHERE id = ?;", 
             [req.body.firstName, req.body.lastName || user.firstName, user.lastName, req.body.email || user.email, req.params.id]);
@@ -49,7 +49,7 @@ router.put("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
     try {
         const user = await dbQuery("SELECT * FROM users WHERE id = ?;", [req.params.id]);
-        if (!user) return res.status(404).json({ message: "Gatya" });
+        if (!user) return res.status(404).json({ message: "Sikertelen!" });
 
         await dbRun("DELETE FROM users WHERE id = ?;", [req.params.id]);
         res.sendStatus(204);
